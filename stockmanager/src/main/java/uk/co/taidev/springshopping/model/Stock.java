@@ -2,17 +2,17 @@ package uk.co.taidev.springshopping.model;
 
 public class Stock {
 
-    private long productId;
+    private String productId;
     private String sku;
     private int amountAvailable;
 
-    public Stock(long productId, String sku, int amountAvailable) {
+    public Stock(String productId, String sku, int amountAvailable) {
         this.productId = productId;
         this.sku = sku;
         this.amountAvailable = amountAvailable;
     }
 
-    public long getProductId() {
+    public String getProductId() {
         return productId;
     }
 

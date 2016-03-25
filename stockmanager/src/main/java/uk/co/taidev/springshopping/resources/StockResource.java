@@ -15,7 +15,7 @@ public class StockResource {
     private StockService stockService;
 
     @RequestMapping("{productId}")
-    public Stock getStock(@PathVariable("productId") long productId) throws StockNotFoundException {
+    public Stock getStock(@PathVariable("productId") String productId) throws StockNotFoundException {
         return stockService.getStock(productId);
     }
 

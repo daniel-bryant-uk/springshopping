@@ -11,14 +11,15 @@ import java.util.Optional;
 @Service
 public class StockService {
 
-    private Map<Long, Stock> fakeStockDAO = new HashMap<>();
+    //{productId, Stock}
+    private Map<String, Stock> fakeStockDAO = new HashMap<>();
 
     public StockService() {
-        fakeStockDAO.put(1L, new Stock(1, "12345678", 3));
-        fakeStockDAO.put(2L, new Stock(2, "34567890", 0));
+        fakeStockDAO.put("1", new Stock("1", "12345678", 3));
+        fakeStockDAO.put("2", new Stock("2", "34567890", 0));
     }
 
-    public Stock getStock(Long productId) throws StockNotFoundException {
+    public Stock getStock(String productId) throws StockNotFoundException {
         return Optional.ofNullable(fakeStockDAO.get(productId))
                 .orElseThrow(() -> new StockNotFoundException("Stock not found with productId: " + productId));
     }

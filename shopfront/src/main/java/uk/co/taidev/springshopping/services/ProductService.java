@@ -16,7 +16,7 @@ public class ProductService {
     private RestTemplate restTemplate;
 
     public List<Product> getProducts() {
-        return Collections.singletonList(new Product("1", "Widget", "ACME grade A widget", new BigDecimal(1.2)));
+        return Collections.singletonList(new Product("1", "12345678", "Widget", "ACME grade A widget", new BigDecimal(1.2), 2));
     }
 
 }

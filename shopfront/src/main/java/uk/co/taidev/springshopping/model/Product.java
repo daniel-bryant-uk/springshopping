@@ -10,6 +10,13 @@ public class Product {
     private BigDecimal price;
     private int amountAvailable;
 
+    public Product(String id, String name, String description, BigDecimal price) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+    }
+
     public Product(String id, String sku, String name, String description, BigDecimal price, int amountAvailable) {
         this.id = id;
         this.sku = sku;

@@ -4,9 +4,7 @@ import org.springframework.stereotype.Service;
 import uk.co.taidev.springshopping.exceptions.StockNotFoundException;
 import uk.co.taidev.springshopping.model.Stock;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class StockService {
@@ -17,6 +15,10 @@ public class StockService {
     public StockService() {
         fakeStockDAO.put("1", new Stock("1", "12345678", 3));
         fakeStockDAO.put("2", new Stock("2", "34567890", 0));
+    }
+
+    public List<Stock> getStocks() {
+        return new ArrayList<>(fakeStockDAO.values());
     }
 
     public Stock getStock(String productId) throws StockNotFoundException {

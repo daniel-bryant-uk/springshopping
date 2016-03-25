@@ -6,6 +6,7 @@ import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import uk.co.taidev.springshopping.product.configuration.ProductServiceConfiguration;
+import uk.co.taidev.springshopping.product.healthchecks.BasicHealthCheck;
 import uk.co.taidev.springshopping.product.resources.ProductResource;
 
 public class ProductServiceApplication extends Application<ProductServiceConfiguration> {
@@ -24,11 +25,12 @@ public class ProductServiceApplication extends Application<ProductServiceConfigu
     }
 
     @Override
-    public void run(ProductServiceConfiguration configuration,
+    public void run(ProductServiceConfiguration config,
                     Environment environment) {
-        //di with guice
+        final BasicHealthCheck healthCheck = new BasicHealthCheck(config.getVersion());
+        environment.healthChecks().register("template", healthCheck);
+
         Injector injector = Guice.createInjector();
         environment.jersey().register(injector.getInstance(ProductResource.class));
     }
-
 }

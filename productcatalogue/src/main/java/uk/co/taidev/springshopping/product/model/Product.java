@@ -2,27 +2,42 @@ package uk.co.taidev.springshopping.product.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Product {
-    private long id;
+import java.math.BigDecimal;
 
-    private String content;
+public class Product {
+    private String id;
+    private String name;
+    private String description;
+    private BigDecimal price;
 
     public Product() {
-        // Jackson deserialization
+        // Needed for Jackson deserialization
     }
 
-    public Product(long id, String content) {
+    public Product(String id, String name, String description, BigDecimal price) {
         this.id = id;
-        this.content = content;
+        this.name = name;
+        this.description = description;
+        this.price = price;
     }
 
     @JsonProperty
-    public long getId() {
+    public String getId() {
         return id;
     }
 
     @JsonProperty
-    public String getContent() {
-        return content;
+    public String getName() {
+        return name;
+    }
+
+    @JsonProperty
+    public String getDescription() {
+        return description;
+    }
+
+    @JsonProperty
+    public BigDecimal getPrice() {
+        return price;
     }
 }

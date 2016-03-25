@@ -1,25 +1,21 @@
 package uk.co.taidev.springshopping.product.configuration;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;
+import org.hibernate.validator.constraints.NotEmpty;
 
 public class ProductServiceConfiguration extends Configuration {
 
-    private String serviceName;
+    @NotEmpty
+    private String version;
 
-    @JsonCreator
-    public ProductServiceConfiguration(String serviceName) {
-        this.serviceName = serviceName;
+    @JsonProperty
+    public String getVersion() {
+        return version;
     }
 
     @JsonProperty
-    public String getServiceName() {
-        return serviceName;
-    }
-
-    @JsonProperty
-    public void setServiceName(String serviceName) {
-        this.serviceName = serviceName;
+    public void setVersion(String version) {
+        this.version = version;
     }
 }

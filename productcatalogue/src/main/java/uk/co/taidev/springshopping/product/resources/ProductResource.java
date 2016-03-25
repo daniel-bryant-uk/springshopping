@@ -2,14 +2,15 @@ package uk.co.taidev.springshopping.product.resources;
 
 import com.codahale.metrics.annotation.Timed;
 import com.google.inject.Inject;
-import uk.co.taidev.springshopping.product.exceptions.ProductNotFoundException;
 import uk.co.taidev.springshopping.product.model.Product;
 import uk.co.taidev.springshopping.product.services.ProductService;
 
-import javax.ws.rs.*;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.List;
 import java.util.Optional;
 
 @Path("/products")
@@ -31,11 +32,10 @@ public class ProductResource {
                 .build();
     }
 
-
     @GET
     @Timed
     @Path("{id}")
-    public Response getProduct(@PathParam("id") String id) throws ProductNotFoundException {
+    public Response getProduct(@PathParam("id") String id) {
         Optional<Product> result = productService.getProduct(id);
 
         if (result.isPresent()) {

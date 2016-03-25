@@ -1,4 +1,4 @@
-package uk.co.taidev.springshopping.controllers;
+package uk.co.taidev.springshopping.resources;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,7 +9,7 @@ import uk.co.taidev.springshopping.services.StockService;
 
 @RestController
 @RequestMapping("/stocks")
-public class StockController {
+public class StockResource {
 
     @Autowired
     private StockService stockService;

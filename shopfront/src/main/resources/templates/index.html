@@ -1,9 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Title</title>
+    <title>Welcome to SpringShopping!</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<p>Hello</p>
+<h1>Welcome to SpringShopping!</h1>
+<p>Please view our range of fantastic products!</p>
+
+<table border="1" width="50%">
+    <tr>
+        <th>Product Num</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price £</th>
+    </tr>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.id}">1</td>
+        <td th:text="${product.name}">Widget</td>
+        <td th:text="${product.description}">Widget</td>
+        <td th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}">1.19</td>
+    </tr>
+</table>
 </body>
 </html>

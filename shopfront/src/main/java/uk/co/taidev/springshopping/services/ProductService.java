@@ -24,6 +24,7 @@ public class ProductService {
     @Autowired
     private RestTemplate restTemplate;
 
+    //todo extract DTO get methods to external Repo Classes (makes mocking easier)
     public List<Product> getProducts() {
         Map<String, ProductDTO> productDTOs = getProductDTOs();
         Map<String, StockDTO> stockDTOMap = getStockDTOs();

@@ -15,4 +15,10 @@
       when: "ansible_os_family == 'Debian'"
       java_packages:
         - openjdk-8-jdk
-#    - role: geerlingguy.jenkins
+
+- hosts: jenkins
+  remote_user: vagrant
+  serial: 1
+  sudo: yes
+  roles:
+    - geerlingguy.jenkins

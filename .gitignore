@@ -13,5 +13,7 @@ buildNumber.properties
 *.war
 *.ear
 
+# Vagrant 
+.vagrant/
 # Mac
 .DS_Store

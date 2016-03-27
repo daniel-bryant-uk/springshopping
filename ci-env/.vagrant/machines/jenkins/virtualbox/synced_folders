@@ -1,0 +1,1 @@
+{"virtualbox":{"/vagrant":{"guestpath":"/vagrant","hostpath":"/Users/danielbryant/Documents/dev/daniel-bryant-uk/springshopping/ci-env","disabled":false,"__vagrantfile":true},"vagrant-cache":{"id":"vagrant-cache","guestpath":"/tmp/vagrant-cache","hostpath":"/Users/danielbryant/.vagrant.d/cache/larryli/vivid64","disabled":false,"__vagrantfile":true}}}

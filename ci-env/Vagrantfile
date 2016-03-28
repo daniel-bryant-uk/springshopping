@@ -29,9 +29,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # end
 
   config.vm.define "jenkins" do |d|
-    d.vm.box = "larryli/vivid64"
+    d.vm.box = "ubuntu/trusty64"
     d.vm.hostname = "jenkins"
     d.vm.network "private_network", ip: "10.100.192.100"
+    d.vm.network "forwarded_port", guest: 8080, host: 8080
     d.vm.provider "virtualbox" do |v|
       v.memory = 2048
     end

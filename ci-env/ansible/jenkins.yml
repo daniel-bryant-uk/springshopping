@@ -1,6 +1,5 @@
 - hosts: jenkins
   remote_user: vagrant
-  serial: 1
   sudo: yes
   tasks:
     - name: installing repo for Java 8 in Ubuntu
@@ -8,7 +7,6 @@
 
 - hosts: jenkins
   remote_user: vagrant
-  serial: 1
   sudo: yes
   roles:
     - role: geerlingguy.java
@@ -18,7 +16,19 @@
 
 - hosts: jenkins
   remote_user: vagrant
-  serial: 1
   sudo: yes
+  vars:
+    jenkins_plugins:
+      - git
+      - sonar
+      - ssh
+      - docker-build-publish
   roles:
     - geerlingguy.jenkins
+
+- name: Install Docker
+  remote_user: vagrant
+  sudo: yes
+  hosts: jenkins
+  roles:
+    - angstwad.docker_ubuntu

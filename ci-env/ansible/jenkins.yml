@@ -1,11 +1,13 @@
-- hosts: jenkins
+- name: Add Java 8 repo
+  hosts: jenkins
   remote_user: vagrant
   sudo: yes
   tasks:
     - name: installing repo for Java 8 in Ubuntu
       apt_repository: repo='ppa:openjdk-r/ppa'
 
-- hosts: jenkins
+- name: Install Java 8
+  hosts: jenkins
   remote_user: vagrant
   sudo: yes
   roles:
@@ -14,7 +16,16 @@
       java_packages:
         - openjdk-8-jdk
 
-- hosts: jenkins
+#TODO - Add a check to determine whether this should run
+- name: Change default JDK to version 8
+  hosts: jenkins
+  remote_user: vagrant
+  sudo: yes
+  tasks:
+    - shell: update-java-alternatives --set java-1.8.0-openjdk-amd64
+
+- name: Install Jenkins
+  hosts: jenkins
   remote_user: vagrant
   sudo: yes
   vars:
@@ -32,3 +43,10 @@
   hosts: jenkins
   roles:
     - angstwad.docker_ubuntu
+
+- name: Add Jenkins user to docker group
+  remote_user: vagrant
+  sudo: yes
+  hosts: jenkins
+  tasks:
+    - user: name=jenkins append=yes group=docker

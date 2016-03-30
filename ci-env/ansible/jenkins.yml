@@ -1,52 +1,23 @@
-- name: Add Java 8 repo
-  hosts: jenkins
-  remote_user: vagrant
-  sudo: yes
-  tasks:
-    - name: installing repo for Java 8 in Ubuntu
-      apt_repository: repo='ppa:openjdk-r/ppa'
-
-- name: Install Java 8
-  hosts: jenkins
-  remote_user: vagrant
-  sudo: yes
-  roles:
-    - role: geerlingguy.java
-      when: "ansible_os_family == 'Debian'"
-      java_packages:
-        - openjdk-8-jdk
-
-#TODO - Add a check to determine whether this should run
-- name: Change default JDK to version 8
-  hosts: jenkins
-  remote_user: vagrant
-  sudo: yes
-  tasks:
-    - shell: update-java-alternatives --set java-1.8.0-openjdk-amd64
-
 - name: Install Jenkins
   hosts: jenkins
   remote_user: vagrant
-  sudo: yes
+  become: yes
   vars:
     jenkins_plugins:
       - git
       - sonar
       - ssh
       - docker-build-publish
+    java_packages:
+      - openjdk-8-jdk
+  pre_tasks:
+      - name: installing repo for Java 8 in Ubuntu
+        apt_repository: repo='ppa:openjdk-r/ppa'
+
   roles:
+    - geerlingguy.java
     - geerlingguy.jenkins
-
-- name: Install Docker
-  remote_user: vagrant
-  sudo: yes
-  hosts: jenkins
-  roles:
     - angstwad.docker_ubuntu
-
-- name: Add Jenkins user to docker group
-  remote_user: vagrant
-  sudo: yes
-  hosts: jenkins
-  tasks:
-    - user: name=jenkins append=yes group=docker
+  post_tasks:
+    - name: Add jenkins user to docker group
+      user: name=jenkins append=yes group=docker

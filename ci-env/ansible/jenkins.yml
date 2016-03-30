@@ -8,8 +8,10 @@
       - sonar
       - ssh
       - docker-build-publish
+      - ansicolor
     java_packages:
       - openjdk-8-jdk
+
   pre_tasks:
       - name: installing repo for Java 8 in Ubuntu
         apt_repository: repo='ppa:openjdk-r/ppa'
@@ -18,6 +20,8 @@
     - geerlingguy.java
     - geerlingguy.jenkins
     - angstwad.docker_ubuntu
+
   post_tasks:
     - name: Add jenkins user to docker group
       user: name=jenkins append=yes group=docker
+    - service: name=jenkins state=restarted

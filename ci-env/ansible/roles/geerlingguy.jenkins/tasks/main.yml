@@ -46,3 +46,6 @@
 
 # Update Jenkins and install configured plugins.
 - include: plugins.yml
+
+- copy: src=hudson.tasks.Maven.xml dest=/var/lib/jenkins owner=jenkins group=jenkins mode=0644
+- copy: src=jobs dest=/var/lib/jenkins owner=jenkins group=jenkins mode=0644

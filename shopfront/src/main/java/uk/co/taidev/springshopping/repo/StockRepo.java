@@ -3,6 +3,7 @@ package uk.co.taidev.springshopping.repo;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -19,16 +20,17 @@ import java.util.stream.Collectors;
 @Component
 public class StockRepo {
 
-    private static final String STOCK_MANAGER_LOCATION = "http://localhost:8090";
+    @Value("${location.stockManager}")
+    private String stockManagerLocation;
 
     @Autowired
     @Qualifier(value = "stdRestTemplate")
     private RestTemplate restTemplate;
 
-    //@HystrixCommand(fallbackMethod = "stocksNotFound")
+    @HystrixCommand(fallbackMethod = "stocksNotFound")
     public Map<String, StockDTO> getStockDTOs() {
         ResponseEntity<List<StockDTO>> stockManagerResponse =
-                restTemplate.exchange(STOCK_MANAGER_LOCATION + "/stocks",
+                restTemplate.exchange(stockManagerLocation + "/stocks",
                         HttpMethod.GET, null, new ParameterizedTypeReference<List<StockDTO>>() {
                         });
         List<StockDTO> stockDTOs = stockManagerResponse.getBody();

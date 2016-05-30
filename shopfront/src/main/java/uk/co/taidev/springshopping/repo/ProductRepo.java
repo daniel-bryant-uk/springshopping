@@ -2,6 +2,7 @@ package uk.co.taidev.springshopping.repo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,8 @@ import java.util.stream.Collectors;
 @Component
 public class ProductRepo {
 
-    private static final String PRODUCT_CATALOGUE_LOCATION = "http://localhost:9010";
+    @Value("${location.productCatalogue}")
+    private String productCatalogueLocation;
 
     @Autowired
     @Qualifier(value = "stdRestTemplate")
@@ -26,7 +28,7 @@ public class ProductRepo {
 
     public Map<String, ProductDTO> getProductDTOs() {
         ResponseEntity<List<ProductDTO>> productCatalogueResponse =
-                restTemplate.exchange(PRODUCT_CATALOGUE_LOCATION + "/products",
+                restTemplate.exchange(productCatalogueLocation + "/products",
                         HttpMethod.GET, null, new ParameterizedTypeReference<List<ProductDTO>>() {
                         });
         List<ProductDTO> productDTOs = productCatalogueResponse.getBody();

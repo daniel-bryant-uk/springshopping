@@ -1,0 +1,2 @@
+location.productCatalogue=http://localhost:9010
+location.stockManager=http://localhost:8090

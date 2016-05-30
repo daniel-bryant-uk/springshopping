@@ -5,6 +5,8 @@ public class StockDTO {
     private String sku;
     private int amountAvailable;
 
+    public static final StockDTO DEFAULT_STOCK_DTO = new StockDTO("", "default", 999);
+
     public StockDTO() {
     }
 

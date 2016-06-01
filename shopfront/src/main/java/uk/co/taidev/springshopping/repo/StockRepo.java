@@ -1,6 +1,8 @@
 package uk.co.taidev.springshopping.repo;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.ParameterizedTypeReference;
@@ -19,14 +21,16 @@ import java.util.stream.Collectors;
 @Component
 public class StockRepo {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(StockRepo.class);
     private static final String STOCK_MANAGER_LOCATION = "http://localhost:8090";
 
     @Autowired
     @Qualifier(value = "stdRestTemplate")
     private RestTemplate restTemplate;
 
-    //@HystrixCommand(fallbackMethod = "stocksNotFound")
+    @HystrixCommand(fallbackMethod = "stocksNotFound")
     public Map<String, StockDTO> getStockDTOs() {
+        LOGGER.info("getStocksDTOs");
         ResponseEntity<List<StockDTO>> stockManagerResponse =
                 restTemplate.exchange(STOCK_MANAGER_LOCATION + "/stocks",
                         HttpMethod.GET, null, new ParameterizedTypeReference<List<StockDTO>>() {
@@ -38,6 +42,7 @@ public class StockRepo {
     }
 
     public Map<String, StockDTO> stocksNotFound() {
+        LOGGER.info("stocksNotFound *** FALLBACK ***");
         return Collections.EMPTY_MAP;
     }
 }

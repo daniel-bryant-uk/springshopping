@@ -23,7 +23,6 @@ public class ProductService {
     private ProductRepo productRepo;
 
 
-    //    @HystrixCommand(fallbackMethod = "productsNotFound")
     public List<Product> getProducts() {
         Map<String, ProductDTO> productDTOs = productRepo.getProductDTOs();
         Map<String, StockDTO> stockDTOMap = stockRepo.getStockDTOs();

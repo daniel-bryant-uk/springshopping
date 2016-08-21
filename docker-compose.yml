@@ -2,9 +2,19 @@ version: '2'
 services:
   shopfront:
     build: shopfront
+    image: danielbryantuk/ssshopfront
     ports:
-     - "8080:8080"
+     - "8070:8070"
+    links:
+      - productcatalogue
+      - stockmanager
   productcatalogue:
     build: productcatalogue
+    image: danielbryantuk/ssproductcatalogue
+    ports:
+     - "9010:9010"
+  stockmanager:
+    build: stockmanager
+    image: danielbryantuk/ssstockmanager
     ports:
      - "8090:8090"

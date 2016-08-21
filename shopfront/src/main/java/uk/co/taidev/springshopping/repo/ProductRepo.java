@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @Component
 public class ProductRepo {
 
-    private static final String PRODUCT_CATALOGUE_LOCATION = "http://localhost:9010";
+    private static final String PRODUCT_CATALOGUE_LOCATION = "http://productcatalogue:9010";
 
     @Autowired
     @Qualifier(value = "stdRestTemplate")

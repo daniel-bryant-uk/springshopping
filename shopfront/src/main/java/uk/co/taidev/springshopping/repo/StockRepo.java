@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public class StockRepo {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(StockRepo.class);
-    private static final String STOCK_MANAGER_LOCATION = "http://localhost:8090";
+    private static final String STOCK_MANAGER_LOCATION = "http://stockmanager:8090";
 
     @Autowired
     @Qualifier(value = "stdRestTemplate")

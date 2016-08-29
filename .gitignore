@@ -20,3 +20,6 @@ buildNumber.properties
 
 #retry
 *.retry
+
+#logs
+*.log

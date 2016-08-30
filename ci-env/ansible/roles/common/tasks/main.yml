@@ -1,4 +1,0 @@
-- name: JQ is present
-  apt:
-    name: jq
-  tags: [common]
